@@ -1,1 +1,0 @@
-# thai-vedic-astro-site
