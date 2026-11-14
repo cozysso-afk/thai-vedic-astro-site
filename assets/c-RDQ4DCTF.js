@@ -1,0 +1,1 @@
+var F={red:{bg:"#C2342B",on:"#FFFFFF"},yellow:{bg:"#EBC543",on:"#1B2A30"},pink:{bg:"#E893AA",on:"#1B2A30"},green:{bg:"#237A4B",on:"#FFFFFF"},grey:{bg:"#566166",on:"#FFFFFF"},orange:{bg:"#E88A2E",on:"#1B2A30"},blue:{bg:"#2A72B0",on:"#FFFFFF"},purple:{bg:"#67479A",on:"#FFFFFF"}};export{F as a};
