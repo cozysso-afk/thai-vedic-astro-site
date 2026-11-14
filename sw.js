@@ -1,1 +1,14 @@
-if(!self.define){let e,i={};const n=(n,s)=>(n=new URL(n+".js",s).href,i[n]||new Promise(i=>{if("document"in self){const e=document.createElement("script");e.src=n,e.onload=i,document.head.appendChild(e)}else e=n,importScripts(n),i()}).then(()=>{let e=i[n];if(!e)throw new Error(`Module ${n} didn’t register its module`);return e}));self.define=(s,o)=>{const r=e||("document"in self?document.currentScript.src:"")||location.href;if(i[r])return;let c={};const a=e=>n(e,r),l={module:{uri:r},exports:c,require:a};i[r]=Promise.all(s.map(e=>l[e]||a(e))).then(e=>(o(...e),c))}}define(["./workbox-9c191d2f"],function(e){"use strict";self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"registerSW.js",revision:"13c07a062e848df0f672f47c696cf913"},{url:"index.html",revision:"5be18bc0c6e27267a3c4302428a1b95d"},{url:"icons/maskable-512.png",revision:"bf60a501aa133a3568da7f08a71049a7"},{url:"icons/icon-512.png",revision:"94b6f55ef91bafba80965c14561ae5be"},{url:"icons/icon-192.png",revision:"5ae721c8d67c7edba4d54e458561b772"},{url:"icons/apple-touch-icon.png",revision:"7a1d7f7c8c99020f64361070b2ae3db8"},{url:"assets/index-CbYp5C9Q.css",revision:null},{url:"assets/index-B00DV2pm.js",revision:null},{url:"icons/apple-touch-icon.png",revision:"7a1d7f7c8c99020f64361070b2ae3db8"},{url:"icons/icon-192.png",revision:"5ae721c8d67c7edba4d54e458561b772"},{url:"icons/icon-512.png",revision:"94b6f55ef91bafba80965c14561ae5be"},{url:"icons/maskable-512.png",revision:"bf60a501aa133a3568da7f08a71049a7"},{url:"manifest.webmanifest",revision:"b39ebe5ecf53331a148d843b777a883b"}],{}),e.cleanupOutdatedCaches(),e.registerRoute(new e.NavigationRoute(e.createHandlerBoundToURL("index.html")))});
+// 배포용 서비스워커 (0.3.0). 새 버전이 오면 바로 교체하고 옛 캐시(옛 workbox 캐시 포함)를 지운다.
+const CACHE='tva-551e8ac316';
+const FILES=["/thai-vedic-astro-site/", "/thai-vedic-astro-site/index.html", "/thai-vedic-astro-site/assets/index-27342WBS.js", "/thai-vedic-astro-site/assets/index-W5D2CPW2.css", "/thai-vedic-astro-site/manifest.webmanifest", "/thai-vedic-astro-site/icons/icon-192.png", "/thai-vedic-astro-site/icons/icon-512.png", "/thai-vedic-astro-site/icons/apple-touch-icon.png", "/thai-vedic-astro-site/icons/maskable-512.png"];
+self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)))});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+self.addEventListener('fetch',e=>{
+  const r=e.request;
+  if(r.method!=='GET'||new URL(r.url).origin!==location.origin)return;
+  if(r.mode==='navigate'){
+    e.respondWith(fetch(r).then(res=>{const c=res.clone();caches.open(CACHE).then(x=>x.put('/thai-vedic-astro-site/index.html',c));return res}).catch(()=>caches.match('/thai-vedic-astro-site/index.html')));
+    return;
+  }
+  e.respondWith(caches.match(r).then(hit=>hit||fetch(r)));
+});
