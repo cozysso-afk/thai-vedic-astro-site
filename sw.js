@@ -1,7 +1,7 @@
-// 배포용 서비스워커 (0.9.0). 새 버전이 오면 바로 교체하고 옛 캐시를 지운다. 글꼴 캐시(tva-fonts)는 버전과 상관없이 남긴다.
-const CACHE='tva-e6488429f7';
+// 배포용 서비스워커 (0.9.1). 새 버전이 오면 바로 교체하고 옛 캐시를 지운다. 글꼴 캐시(tva-fonts)는 버전과 상관없이 남긴다.
+const CACHE='tva-0bec8bcf7d';
 const FONTS='tva-fonts';
-const FILES=["/thai-vedic-astro-site/", "/thai-vedic-astro-site/index.html", "/thai-vedic-astro-site/manifest.webmanifest", "/thai-vedic-astro-site/icons/icon-192.png", "/thai-vedic-astro-site/icons/icon-512.png", "/thai-vedic-astro-site/icons/apple-touch-icon.png", "/thai-vedic-astro-site/icons/maskable-512.png", "/thai-vedic-astro-site/assets/c-6V4TGIFN.js", "/thai-vedic-astro-site/assets/c-AA4SIPIE.js", "/thai-vedic-astro-site/assets/c-KXSONWI7.js", "/thai-vedic-astro-site/assets/c-MMT3PNHH.js", "/thai-vedic-astro-site/assets/c-RDQ4DCTF.js", "/thai-vedic-astro-site/assets/c-V53RVNDB.js", "/thai-vedic-astro-site/assets/index-3CMSPAC6.css", "/thai-vedic-astro-site/assets/index-OF5MRCB3.js"];
+const FILES=["/thai-vedic-astro-site/", "/thai-vedic-astro-site/index.html", "/thai-vedic-astro-site/manifest.webmanifest", "/thai-vedic-astro-site/icons/icon-192.png", "/thai-vedic-astro-site/icons/icon-512.png", "/thai-vedic-astro-site/icons/apple-touch-icon.png", "/thai-vedic-astro-site/icons/maskable-512.png", "/thai-vedic-astro-site/assets/c-BLFVNWKY.js", "/thai-vedic-astro-site/assets/c-I36GAHE2.js", "/thai-vedic-astro-site/assets/c-NJAOVZEQ.js", "/thai-vedic-astro-site/assets/c-RDQ4DCTF.js", "/thai-vedic-astro-site/assets/c-SMHODTWT.js", "/thai-vedic-astro-site/assets/c-T7ELIEGH.js", "/thai-vedic-astro-site/assets/c-VXNOZMVK.js", "/thai-vedic-astro-site/assets/c-YTHN2CPA.js", "/thai-vedic-astro-site/assets/c-ZEIKBTNP.js", "/thai-vedic-astro-site/assets/index-3CMSPAC6.css", "/thai-vedic-astro-site/assets/index-AF5RXNIO.js"];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE&&k!==FONTS).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
